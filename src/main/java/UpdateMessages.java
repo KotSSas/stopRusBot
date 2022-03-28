@@ -17,10 +17,12 @@ import static java.lang.Math.toIntExact;
 
 public class UpdateMessages extends TelegramLongPollingBot {
     List<String> links = new ArrayList<>();
-    public int n = 1;
+
+    public int n = 0;
     @Override
     public void onUpdateReceived(Update update) {
 addFiles();
+        int size = links.size();
 //            if (message_text.equals("/start")) {
 //                String welcome = "Вітаю\uD83C\uDDFA\uD83C\uDDE6️," +
 //                        "Цей бот як і багато інших мають одну функцію - знищити россійське дезінформаційне поле." +
@@ -131,6 +133,7 @@ addFiles();
 
                 KeyboardRow keyboardRow = new KeyboardRow(); //first row
                 KeyboardRow keyboardRow2 = new KeyboardRow();    //second row
+                KeyboardRow keyboardRow3 = new KeyboardRow();    //second row
 
                 //First row buttons
                 KeyboardButton button1 = new KeyboardButton();
@@ -140,9 +143,13 @@ addFiles();
                 button2.setText("Додати канал\uD83D\uDCE9");
 
 
+                KeyboardButton button3 = new KeyboardButton();
+                button3.setText("Статистика\uD83D\uDE80");
+
                 keyboardRow.add(button1);
                 keyboardRow.add(button2);
 
+                keyboardRow3.add(button3);
                 //Second row buttons
                 KeyboardButton button11 = new KeyboardButton();
                 button11.setText("Інформація\uD83D\uDC68\u200D\uD83D\uDCBB");
@@ -156,6 +163,7 @@ addFiles();
                 //Adding a keyboard
                 keyboardRows.add(keyboardRow);
                 keyboardRows.add(keyboardRow2);
+                keyboardRows.add(keyboardRow3);
 
 
                 replyKeyboardMarkup.setResizeKeyboard(true);
@@ -168,39 +176,6 @@ addFiles();
                 } catch (TelegramApiException e) {
                     e.printStackTrace();
                 }
-//            } else if (message_text.equals("Отримати покликання\uD83D\uDD17")
-//                    || message_text.equals("/link")) {
-//                SendMessage message = new SendMessage();
-//                message.setChatId(String.valueOf(chat_id));
-//                message.setText("\uD83D\uDD17Лінк на блокування, який поширює неправдиву інформацію про українське військо: ");
-//
-//                InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
-//                List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
-//                List<InlineKeyboardButton> rowInline = new ArrayList<>();
-//                InlineKeyboardButton in = new InlineKeyboardButton();
-//                in.setText("Отримати текст скарги\uD83D\uDCC3");
-//                in.setCallbackData("update_msg_text");
-//                rowInline.add(in);
-//
-//                // Set the keyboard to the markup
-//                rowsInline.add(rowInline);
-//                // Add it to the message
-//                markupInline.setKeyboard(rowsInline);
-//                message.setReplyMarkup(markupInline);
-//
-//                SendMessage message1 = new SendMessage();
-//                message1.setChatId(String.valueOf(chat_id));
-//                message1.setText(links.get(n));
-//
-//
-//                try {
-//                    execute(message);
-//                    execute(message1);
-//                } catch (TelegramApiException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-
             }
             if (update.getMessage().getText().equals("Отримати покликання\uD83D\uDD17")||update.getMessage().getText().equals("/link")) {
                 SendMessage message = new SendMessage();
@@ -272,6 +247,19 @@ addFiles();
                 }
 
             }
+            if (update.getMessage().getText().equals("Статистика\uD83D\uDE80")||update.getMessage().getText().equals("/stat")){
+                String welcome = "\uD83C\uDDFA\uD83C\uDDE6❤️\u200D\uD83E\uDE79Статистика по боту: \n" +
+                        "Даний розділ був зроблений для того, аби ви побачили кількість ресурсів на які ви подали скарги.\n"+
+                        "⚡Заблоковано вами каналів: "+n;
+                SendMessage message = new SendMessage();
+                message.setChatId(String.valueOf(chat_id));
+                message.setText(welcome);
+                try {
+                    execute(message);
+                } catch (TelegramApiException e) {
+                    e.printStackTrace();
+                }
+            }
 
         }
         else if (update.hasCallbackQuery()) {
@@ -288,6 +276,7 @@ addFiles();
                 new_message.setText(answer);
                 try {
                     execute(new_message);
+                    n++;
                 } catch (TelegramApiException e) {
                     e.printStackTrace();
                 }
