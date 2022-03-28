@@ -261,7 +261,7 @@ addFiles();
 
             }
             if (update.getMessage().getText().equals("Отримати текст скарги\uD83D\uDCC3")){
-                String welcome ="Даний канал розповсюджує неправдиву інформацію стосовно війни в Україні, та пригнічує суверенність України та його народу. #StopWar";
+                String welcome ="Канал підриває цілісність української держави. Поширення фейкових новин, введення в оману людей. Дуже багато постів із погрозами на адресу українців та українських солдатів. Заблокуйте його якнайшвидше!";
                 SendMessage message = new SendMessage();
                 message.setChatId(String.valueOf(chat_id));
                 message.setText(welcome);
@@ -329,6 +329,7 @@ addFiles();
                 new_message.setChatId(String.valueOf(chat_id));
                 new_message.setMessageId(toIntExact(message_id));
                 new_message.setText(answer);
+
                 try {
                     execute(new_message);
                 } catch (TelegramApiException e) {
