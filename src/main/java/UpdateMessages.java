@@ -1,5 +1,6 @@
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -201,8 +202,8 @@ addFiles();
                 message1.setChatId(String.valueOf(chat_id));
                 message1.setText(links.get(rd.nextInt(links.size())));
                 try {
+                    execute(message1); // лінк
                     execute(message); // текст
-                   execute(message1); // лінк
                 } catch (TelegramApiException e) {
                     e.printStackTrace();
                 }
@@ -220,14 +221,38 @@ addFiles();
 
             }
             if (update.getMessage().getText().equals("Інформація\uD83D\uDC68\u200D\uD83D\uDCBB")||update.getMessage().getText().equals("/info")){
-                String welcome = "\uD83D\uDD25Данний бот був зроблений для швидкого та массового блокування россійських ресурсів, котрі поширюють дезінформацію, поки їх війська вбивають наших військових та цивільних людей. Сподіваюся, що всі чати та канали котрі знаходяться в базі бота раз і назавжди зникнуть!\n" +
-                        "⚡️ІНСТРУКЦІЯ З КОРИСТУВАННЯ⚡️: 1.Перед початком блокування каналів, отримайте текст скарг котрі ви будете відсилати, це зроблено для вашої зручності та швидкості роботи.\n" +
-                        "2.Після отримання та копіювання тексту, натискаєте на кнопку меню з отримання лінку на канал ворога." +
-                        "\n3.Переходите в канал і одразу блокуєте його. (Рекомендую від себе навіть не починати поглиблюватися в суть того що там буде)" +
-                        "\n4.Після успішного блокування повертайтеся до бота та наискайте відповідну кнопку. Дякую всім небайдужим за співпрацю, Слава Україні! Ми вистоїмо, ми переможемо!";
+//                String welcome = "\uD83D\uDD25Данний бот був зроблений для швидкого та массового блокування россійських ресурсів, котрі поширюють дезінформацію, поки їх війська вбивають наших військових та цивільних людей. Сподіваюся, що всі чати та канали котрі знаходяться в базі бота раз і назавжди зникнуть!\n" +
+//                        "⚡️ІНСТРУКЦІЯ З КОРИСТУВАННЯ⚡️: 1.Перед початком блокування каналів, отримайте текст скарг котрі ви будете відсилати, це зроблено для вашої зручності та швидкості роботи.\n" +
+//                        "2.Після отримання та копіювання тексту, натискаєте на кнопку меню з отримання лінку на канал ворога." +
+//                        "\n3.Переходите в канал і одразу блокуєте його. (Рекомендую від себе навіть не починати поглиблюватися в суть того що там буде)" +
+//                        "\n4.Після успішного блокування повертайтеся до бота та наискайте відповідну кнопку. Дякую всім небайдужим за співпрацю, Слава Україні! Ми вистоїмо, ми переможемо!";
+                String welcome = "\uD83D\uDD0DІнформаційний розділ.\uD83D\uDD0D" +
+                        "\nЗробив його для того, щоб відповісти на основні питання які можуть у вас виникнути\n" +
+                        "✏️Для продовження оберіть відповідний пункт меню: ";
+
                 SendMessage message = new SendMessage();
                 message.setChatId(String.valueOf(chat_id));
                 message.setText(welcome);
+                InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
+                List<List<InlineKeyboardButton>> rowsInline = new ArrayList<>();
+                List<InlineKeyboardButton> rowInline = new ArrayList<>();
+                List<InlineKeyboardButton> rowInline2 = new ArrayList<>();
+
+                InlineKeyboardButton in = new InlineKeyboardButton();
+                in.setText("️️⚡ІНСТРУКЦІЯ З КОРИСТУВАННЯ⚡");
+                in.setCallbackData("update_msg_text_info");
+                rowInline.add(in);
+
+                InlineKeyboardButton in2 = new InlineKeyboardButton();
+                in2.setText("️️\uD83D\uDCCCПРО ПРОЕКТ\uD83D\uDCCC");
+                in2.setCallbackData("update_msg_text_about");
+                rowInline2.add(in2);
+                // Set the keyboard to the markup
+                rowsInline.add(rowInline);
+                rowsInline.add(rowInline2);
+                // Add it to the message
+                markupInline.setKeyboard(rowsInline);
+                message.setReplyMarkup(markupInline);
                 try {
                     execute(message);
                 } catch (TelegramApiException e) {
@@ -281,6 +306,37 @@ addFiles();
                     e.printStackTrace();
                 }
             }
+            if (call_data.equals("update_msg_text_info")){
+                String answer ="⚡ІНСТРУКЦІЯ З КОРИСТУВАННЯ⚡\n"+
+                        " 1.Перед початком блокування каналів, отримайте текст скарг котрі ви будете відсилати, це зроблено для вашої зручності та швидкості роботи.\n" +
+                        "2.Після отримання та копіювання тексту, натискаєте на кнопку меню з отримання лінку на канал ворога.\n" +
+                        "3.Переходите в канал і одразу блокуєте його. (Рекомендую від себе навіть не починати поглиблюватися в суть того що там буде)\n" +
+                        "4.Після успішного блокування повертайтеся до бота та наискайте відповідну кнопку. Дякую всім небайдужим за співпрацю, Слава Україні! Ми вистоїмо, ми переможемо!";
+                EditMessageText new_message = new EditMessageText();
+                new_message.setChatId(String.valueOf(chat_id));
+                new_message.setMessageId(toIntExact(message_id));
+                new_message.setText(answer);
+                try {
+                    execute(new_message);
+                } catch (TelegramApiException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (call_data.equals("update_msg_text_about")){
+                String answer ="\uD83D\uDCCCПРО ПРОЕКТ\uD83D\uDCCC\n"+
+                        "Данний бот був зроблений для швидкого та массового блокування россійських ресурсів, котрі поширюють дезінформацію, поки їх війська вбивають наших військових та цивільних людей. Сподіваюся, що всі чати та канали котрі знаходяться в базі бота раз і назавжди зникнуть!";
+                EditMessageText new_message = new EditMessageText();
+                new_message.setChatId(String.valueOf(chat_id));
+                new_message.setMessageId(toIntExact(message_id));
+                new_message.setText(answer);
+                try {
+                    execute(new_message);
+                } catch (TelegramApiException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
         }
     }
 
