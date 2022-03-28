@@ -1,3 +1,3 @@
-worker: sh target/bin/stopRFBot2.0
+worker: sh out/artifacts/stopRusBot2_0_jar/stopRusBot2.0.jar
 
 
