@@ -1,2 +1,3 @@
-worker: sh target/bin/stopRFBot
+worker: sh target/bin/stopRFBot2.0
+
 
