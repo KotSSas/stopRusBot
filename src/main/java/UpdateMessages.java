@@ -20,9 +20,10 @@ public class UpdateMessages extends TelegramLongPollingBot {
     List<String> links = new ArrayList<>();
 
     public int n = 0;
+
     @Override
     public void onUpdateReceived(Update update) {
-addFiles();
+        addFiles();
         int size = links.size();
 //            if (message_text.equals("/start")) {
 //                String welcome = "Вітаю\uD83C\uDDFA\uD83C\uDDE6️," +
@@ -178,7 +179,7 @@ addFiles();
                     e.printStackTrace();
                 }
             }
-            if (update.getMessage().getText().equals("Отримати покликання\uD83D\uDD17")||update.getMessage().getText().equals("/link")) {
+            if (update.getMessage().getText().equals("Отримати покликання\uD83D\uDD17") || update.getMessage().getText().equals("/link")) {
                 SendMessage message = new SendMessage();
 
                 message.setChatId(String.valueOf(chat_id));
@@ -208,7 +209,7 @@ addFiles();
                     e.printStackTrace();
                 }
             }
-            if (update.getMessage().getText().equals("Додати канал\uD83D\uDCE9")||update.getMessage().getText().equals("/addC")){
+            if (update.getMessage().getText().equals("Додати канал\uD83D\uDCE9") || update.getMessage().getText().equals("/addC")) {
                 String welcome = "Для відправки лінк на канал, пишіть мені: https://t.me/crim3ss \n ❗️Пам'ятайте, за дезінформацю кров за наших побратимів буде лежати також на ваших ладонях!";
                 SendMessage message = new SendMessage();
                 message.setChatId(String.valueOf(chat_id));
@@ -220,7 +221,7 @@ addFiles();
                 }
 
             }
-            if (update.getMessage().getText().equals("Інформація\uD83D\uDC68\u200D\uD83D\uDCBB")||update.getMessage().getText().equals("/info")){
+            if (update.getMessage().getText().equals("Інформація\uD83D\uDC68\u200D\uD83D\uDCBB") || update.getMessage().getText().equals("/info")) {
 //                String welcome = "\uD83D\uDD25Данний бот був зроблений для швидкого та массового блокування россійських ресурсів, котрі поширюють дезінформацію, поки їх війська вбивають наших військових та цивільних людей. Сподіваюся, що всі чати та канали котрі знаходяться в базі бота раз і назавжди зникнуть!\n" +
 //                        "⚡️ІНСТРУКЦІЯ З КОРИСТУВАННЯ⚡️: 1.Перед початком блокування каналів, отримайте текст скарг котрі ви будете відсилати, це зроблено для вашої зручності та швидкості роботи.\n" +
 //                        "2.Після отримання та копіювання тексту, натискаєте на кнопку меню з отримання лінку на канал ворога." +
@@ -260,8 +261,8 @@ addFiles();
                 }
 
             }
-            if (update.getMessage().getText().equals("Отримати текст скарги\uD83D\uDCC3")){
-                String welcome ="Канал підриває цілісність української держави. Поширення фейкових новин, введення в оману людей. Дуже багато постів із погрозами на адресу українців та українських солдатів. Заблокуйте його якнайшвидше!";
+            if (update.getMessage().getText().equals("Отримати текст скарги\uD83D\uDCC3")) {
+                String welcome = "Канал підриває цілісність української держави. Поширення фейкових новин, введення в оману людей. Дуже багато постів із погрозами на адресу українців та українських солдатів. Заблокуйте його якнайшвидше!";
                 SendMessage message = new SendMessage();
                 message.setChatId(String.valueOf(chat_id));
                 message.setText(welcome);
@@ -272,10 +273,10 @@ addFiles();
                 }
 
             }
-            if (update.getMessage().getText().equals("Статистика\uD83D\uDE80")||update.getMessage().getText().equals("/stat")){
+            if (update.getMessage().getText().equals("Статистика\uD83D\uDE80") || update.getMessage().getText().equals("/stat")) {
                 String welcome = "\uD83C\uDDFA\uD83C\uDDE6❤️\u200D\uD83E\uDE79Статистика по боту: \n" +
-                        "Даний розділ був зроблений для того, аби ви побачили кількість ресурсів на які ви подали скарги.\n"+
-                        "⚡Заблоковано вами каналів: "+n;
+                        "Даний розділ був зроблений для того, аби ви побачили кількість ресурсів на які ви подали скарги.\n" +
+                        "⚡Заблоковано вами каналів: " + n;
                 SendMessage message = new SendMessage();
                 message.setChatId(String.valueOf(chat_id));
                 message.setText(welcome);
@@ -286,8 +287,7 @@ addFiles();
                 }
             }
 
-        }
-        else if (update.hasCallbackQuery()) {
+        } else if (update.hasCallbackQuery()) {
             // Set variables
             String call_data = update.getCallbackQuery().getData();
             long message_id = update.getCallbackQuery().getMessage().getMessageId();
@@ -306,8 +306,8 @@ addFiles();
                     e.printStackTrace();
                 }
             }
-            if (call_data.equals("update_msg_text_info")){
-                String answer ="⚡ІНСТРУКЦІЯ З КОРИСТУВАННЯ⚡\n"+
+            if (call_data.equals("update_msg_text_info")) {
+                String answer = "⚡ІНСТРУКЦІЯ З КОРИСТУВАННЯ⚡\n" +
                         " 1.Перед початком блокування каналів, отримайте текст скарг котрі ви будете відсилати, це зроблено для вашої зручності та швидкості роботи.\n" +
                         "2.Після отримання та копіювання тексту, натискаєте на кнопку меню з отримання лінку на канал ворога.\n" +
                         "3.Переходите в канал і одразу блокуєте його. (Рекомендую від себе навіть не починати поглиблюватися в суть того що там буде)\n" +
@@ -322,8 +322,8 @@ addFiles();
                     e.printStackTrace();
                 }
             }
-            if (call_data.equals("update_msg_text_about")){
-                String answer ="\uD83D\uDCCCПРО ПРОЕКТ\uD83D\uDCCC\n"+
+            if (call_data.equals("update_msg_text_about")) {
+                String answer = "\uD83D\uDCCCПРО ПРОЕКТ\uD83D\uDCCC\n" +
                         "Данний бот був зроблений для швидкого та массового блокування россійських ресурсів, котрі поширюють дезінформацію, поки їх війська вбивають наших військових та цивільних людей. Сподіваюся, що всі чати та канали котрі знаходяться в базі бота раз і назавжди зникнуть!";
                 EditMessageText new_message = new EditMessageText();
                 new_message.setChatId(String.valueOf(chat_id));
@@ -340,7 +340,6 @@ addFiles();
 
         }
     }
-
 
 
     private void addFiles() {
@@ -383,12 +382,27 @@ addFiles();
         links.add("https://t.me/s/juul_dn");
         links.add("https://t.me/mojlugansk");
         links.add("https://t.me/rybar");
-       links.add("https://t.me/voenkorKotenok");
-       links.add("https://t.me/DmitriySteshin");
-       links.add("https://t.me/neoficialniybezsonov");
-       links.add("https://t.me/vysokygovorit");
-       links.add("https://t.me/milinfolive");
-       links.add("https://t.me/politavr1");
+        links.add("https://t.me/voenkorKotenok");
+        links.add("https://t.me/DmitriySteshin");
+        links.add("https://t.me/neoficialniybezsonov");
+        links.add("https://t.me/vysokygovorit");
+        links.add("https://t.me/milinfolive");
+        links.add("https://t.me/politavr1");
+        links.add("t.me/makslorannn");
+        links.add("t.me/Krymchanin_Z");
+        links.add("t.me/R15ru");
+        links.add("t.me/russica2");
+        links.add("t.me/rossia8");
+        links.add("t.me/makslorannn");
+        links.add("t.me/makslorannn");
+        links.add("t.me/rossia8");
+        links.add("t.me/utopiyaproject");
+        links.add("t.me/russica2");
+        links.add("t.me/R15ru");
+        links.add("t.me/Krymchanin_Z");
+        links.add("https://t.me/ostashkonews");
+        links.add("https://t.me/zheltyeslivy");
+
     }
 
     @Override
