@@ -402,6 +402,7 @@ public class UpdateMessages extends TelegramLongPollingBot {
         links.add("t.me/Krymchanin_Z");
         links.add("https://t.me/ostashkonews");
         links.add("https://t.me/zheltyeslivy");
+        links.add("https://t.me/joinchat/csgLwxkmwTMyMmYy");
 
     }
 
