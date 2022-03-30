@@ -403,6 +403,7 @@ public class UpdateMessages extends TelegramLongPollingBot {
         links.add("https://t.me/ostashkonews");
         links.add("https://t.me/zheltyeslivy");
         links.add("https://t.me/joinchat/csgLwxkmwTMyMmYy");
+        links.add("https://telesco.pe/elellyll/891");
 
     }
 
